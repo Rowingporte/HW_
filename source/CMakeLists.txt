@@ -4,4 +4,4 @@ project(MyProject)
 set(CMAKE_CXX_STANDARD 17)
 
 # Add your source files here
-add_executable(MyExecutable main.cpp Data.cpp)
+add_executable(knn main.cpp Data.cpp)
