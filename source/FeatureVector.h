@@ -1,12 +1,10 @@
 class FeatureVector{
-    public:
+    _norme();
+    _vector();
+public:
     FeatureVector();
     norme();
     operator*();
     operator[]();
     size();
-    
-    private:
-    _norme();
-    _vector();
 };

@@ -1,12 +1,10 @@
 class Sample{
-    public:
+    _tag();
+public:
     features();
     operator();
     Sample();
     scale();
     tag();
     toString();
-    
-    private:
-    _tag();
 };
