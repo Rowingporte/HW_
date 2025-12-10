@@ -1,6 +1,6 @@
 cd C:\Perso\INSA_Rennes\Cours\S7\Cpp\Projet\HW_\source
 mingw32-make
-source.exe
+MyExecutable.exe
 
 L’objectif est de programmer en C++ de A à Z un classifieur de type kppv (k plus proches voisins).
 Un classifieur est un outil qui permet d’apprendre, à partir de données, à classer des objets. Dans notre
