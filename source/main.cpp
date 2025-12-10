@@ -2,6 +2,6 @@
 
 int main() {
     Data d;
-    d.load("../jeux_video-critiques/jv-train.ssvm");
+    d.load("../Digits/digits.svm");
     return 0;
 }

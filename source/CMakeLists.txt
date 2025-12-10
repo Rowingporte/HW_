@@ -1,5 +1,5 @@
-cmake_minimum_required(VERSION 3.29)
-project(source)
+cmake_minimum_required(VERSION 3.10)
+project(MyProject)
 
 set(CMAKE_CXX_STANDARD 14)
 
@@ -19,28 +19,3 @@ add_executable(source
     main.cpp
     Sample.cpp
     Sample.h)
-
-
-
-# CMAKELIST A MODIF QUAN ARBORESCENCE REFAITE
-
-#cmake_minimum_required(VERSION 3.29)
-#project(Homework)
-
-# Inclure le dossier des headers
-#include_directories(include) # Mettre les .h dedans
-
-# Ajouter tous les fichiers source
-#set(SOURCES
-#    src/main.cpp
-#    src/FeatureVector.cpp
-#    src/Sample.cpp
-#    src/Data.cpp
-#    src/Knn.cpp
-#    src/KnnCosine.cpp
-#    src/ClassificationReport.cpp
-#)
-
-# Créer l’exécutable
-#add_executable(knn ${SOURCES})
-
