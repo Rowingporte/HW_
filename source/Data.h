@@ -16,7 +16,7 @@ public:
     // add();
     // aspire_les_donnees();
     // Data();
-    int load(const string& file_name);
+    void load(const string& file_name);
     // nbSamples();
     // operator();
     // scale();
