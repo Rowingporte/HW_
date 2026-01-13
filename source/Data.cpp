@@ -54,7 +54,7 @@ Data Data::scale(double factor) const {
         for (const auto& feature : sample.getFeatures()) {
             scaledFeatures.push_back(feature * factor);
         }
-        scaledData._data.push_back(Sample(sample.gettag(), scaledFeatures));
+        scaledData._data.push_back(Sample(sample.tag(), scaledFeatures));
     }
     return scaledData;
 }
@@ -64,5 +64,5 @@ double Data::operator[](size_t index) const {
         throw std::out_of_range("Index out of range");
     }
     // Assuming we want to return the label of the sample at the given index
-    return _data[index].gettag();
+    return _data[index].tag();
 }
