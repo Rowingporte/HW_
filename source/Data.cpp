@@ -28,7 +28,7 @@ void Data::load(const string& file_name) {
             while(iss >> feature) {
                 tabFeatures.push_back(feature);
             }
-            Sample(tag, tabFeatures);
+            //Sample(tag, tabFeatures);
         }
         file.close();
         return;
