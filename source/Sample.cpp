@@ -5,7 +5,7 @@ Sample::Sample(int tag, const std::vector<double>& features)
     : _tag(tag), features(features) {}
 
 // Méthode pour obtenir l'étiquette
-int Sample::gettag() const {
+int Sample::tag() const {
     return _tag;
 }
 
