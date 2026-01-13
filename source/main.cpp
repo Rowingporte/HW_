@@ -1,4 +1,5 @@
 #include "Data.h"
+#include "Sample.h"
 
 int main() {
     Data d;

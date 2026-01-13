@@ -1,4 +1,7 @@
 #include "Data.h"
+#include "Sample.h"
+#include <vector>
+#include <iostream>
 
 void Data::load(const string& file_name) {
     std::ifstream file(file_name);
