@@ -28,11 +28,15 @@ double FeatureVector::operator*(const FeatureVector& other) const {
     return scalaire;
 }
 
- // Surcharge de l'opérateur
-//double& FeatureVector::operator[](void) {
-    // Aucune idée de à quoi ça sert
-//}
+// Accès en lecture/écriture
+double& FeatureVector::operator[](int index) {
+    return _vector[index]; 
+}
 
+// Accès en lecture seule (pour les objets const)
+double FeatureVector::operator[](int index) const {
+    return _vector[index];
+}
 
 // Retourne la taille du vecteur
 size_t FeatureVector::size() const {
