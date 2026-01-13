@@ -1,4 +1,7 @@
 #include "Data.h"
+#include "Sample.h"
+#include <vector>
+#include <iostream>
 
 void Data::load(const string& file_name) {
     std::ifstream file(file_name);
@@ -28,7 +31,7 @@ void Data::load(const string& file_name) {
             while(iss >> feature) {
                 tabFeatures.push_back(feature);
             }
-            //Sample(tag, tabFeatures);
+            Sample(tag, tabFeatures);
         }
         file.close();
         return;

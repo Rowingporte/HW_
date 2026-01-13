@@ -1,24 +1,24 @@
 #ifndef SAMPLE_H
 #define SAMPLE_H
 
-#include <string>
+#include <vector>
+#include <iostream>
 
 class Sample {
-private:
-    int _tag;  // Member variable to store the tag
-
 public:
-    // Constructor
-    Sample(int tag);
+    // Constructeur
+    Sample(int label, const std::vector<double>& features);
 
-    // Getter for the tag
-    int getTag() const;
+    // Méthodes pour obtenir des informations sur l'échantillon
+    int getLabel() const;
+    const std::vector<double>& getFeatures() const;
 
-    // Method declarations
-    void features();
-    void operator[]() const;  // Overloading operator()
-    void scale();
-    std::string toString() const;  // Method to return string representation
+    // Afficher les informations de l'échantillon
+    void print() const;
+
+private:
+    int label; // Étiquette de classe (0 à 9)
+    std::vector<double> features; // Vecteur de caractéristiques
 };
 
 #endif // SAMPLE_H
