@@ -38,7 +38,7 @@ class Knn {
         //void getKnn(); J'AI PAS COMPRIS
 
         // Prédit l'étiquette (0 à 9) pour un seul exemple
-        int predictSingle(const Sample& sample);
+        virtual int predictSingle(const Sample& sample);
 };
 
 #endif

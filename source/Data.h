@@ -20,12 +20,12 @@ class Data{
     int _nbFeatures;
     vector<Sample> _data;
 public:
-    Data() : _nbSamples(0), _nbFeatures(0) {}           // Constructeur par défaut
+    Data() : _nbSamples(0), _nbFeatures(0) {}
     void load(const string& file_name);                 // Charger les données depuis un fichier
     void add(int tag, const vector<double> &features);  // Ajouter un échantillon
-    void toString() const;                              // Afficher les données
+    void toString() const;
     double operator[](int index) const;                 // Accès aux échantillons par index
-    int nbSamples() const { return _nbSamples; }        // Obtenir le nombre d'échantillons
+    int nbSamples() const { return _nbSamples; }
 };
 
 #endif // DATA_H
