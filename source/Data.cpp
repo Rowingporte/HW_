@@ -53,5 +53,5 @@ double Data::operator[](int index) const {
     if (index >= _nbSamples) {
         throw std::out_of_range("Index non valide");
     }
-    return _data[index].gettag();   // Retourne le tag de l'échantillon à l'index donné
+    return _data[index].tag();   // Retourne le tag de l'échantillon à l'index donné
 }
