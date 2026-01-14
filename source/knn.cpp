@@ -62,3 +62,7 @@ int Knn::predictSingle(const Sample& sample) {
 
     return bestLabel;
 }
+
+void Knn::getKnn() {
+    return 
+}
