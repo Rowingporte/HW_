@@ -1,23 +1,21 @@
 #ifndef KNN_H
-#define KNN_h
+#define KNN_H
 
 #include <vector>
+#include <utility> // Nécessaire pour std::pair
 
-// *******************************************************
-// A SUPPRIMER PLUS TARD QUAND AUTRES FICHIERS FAITS
+// Forward declarations
 class Data;
 class Sample;
 class ClassificationReport;
-// *******************************************************
-
 
 class Knn {
     public:
-        // Constructeur : on fixe k (nombre de voisins)
+        // Constructeur
         Knn(int k);
 
         // Destructeur
-        virtual ~Knn() {};
+        virtual ~Knn() {}
 
         // Stocke les données d'apprentissage (Lazy Learning)
         void lazy_train(Data* data);
@@ -25,20 +23,18 @@ class Knn {
         // Prédit les étiquettes pour un jeu de test complet et renvoie un rapport
         ClassificationReport* predict(Data* testData);
 
+        // Prédit l'étiquette pour un seul exemple
+        int predictSingle(const Sample& sample);
+
     protected:
         int _k;              // Le paramètre K
         Data* _trainData;    // Pointeur vers données d'apprentissage
 
-         // Classe fille de KnnCosine
+        // Fonction de calcul de distance/similarité
         virtual double similarity(const Sample& a, const Sample& b);
 
-        // Récupère les k plus proches voisins (scores et étiquettes)
-        // étiquette : chiffre de 0 à 9
-        // score : résultat du calcul mathématique de la fonction similarity entre vecteur testé et celui la base de données
-        void getKnn();
-
-        // Prédit l'étiquette (0 à 9) pour un seul exemple
-        virtual int predictSingle(const Sample& sample);
+        // Récupère les k plus proches voisins
+        std::vector<std::pair<double, int>> getKnn(const Sample& sample);
 };
 
 #endif

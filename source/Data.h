@@ -1,31 +1,31 @@
 #ifndef DATA_H
 #define DATA_H
 
-#include "Sample.h"
-#include <iostream>
-#include <fstream>
-#include <sstream>
 #include <vector>
 #include <string>
-#include <cstdint>
+#include <fstream>
+#include <sstream>
+#include <iostream>
+#include "Sample.h"
 
-using std::string;
-using std::vector;
-using std::cout;
-using std::endl;
-using std::cerr;
+using namespace std;
 
-class Data{
+class Data {
+public:
+    void load(const string& file_name);
+    void add(int tag, const vector<double> &features);
+    void toString() const;
+    
+    // Accès sécurisé aux échantillons (indispensable pour Knn)
+    const Sample& getSample(int index) const { return _data[index]; }
+    
+    int nbSamples() const { return _nbSamples; }
+    double operator[](int index) const;
+
+private:
+    vector<Sample> _data;
     int _nbSamples;
     int _nbFeatures;
-    vector<Sample> _data;
-public:
-    Data() : _nbSamples(0), _nbFeatures(0) {}
-    void load(const string& file_name);                 // Charger les données depuis un fichier
-    void add(int tag, const vector<double> &features);  // Ajouter un échantillon
-    void toString() const;
-    double operator[](int index) const;                 // Accès aux échantillons par index
-    int nbSamples() const { return _nbSamples; }
 };
 
-#endif // DATA_H
+#endif
