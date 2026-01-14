@@ -16,7 +16,6 @@ double FeatureVector::norme() {
     return _norme;
 }
 
-
 // Calcule le produit scalaire entre deux vecteurs
 double FeatureVector::operator*(const FeatureVector& other) const {
     double scalaire = 0.0;
