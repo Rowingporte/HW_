@@ -1,68 +1,72 @@
-#include "Knn.h"
-#include "Data.h"                // Pour utiliser _trainData->nbSamples()
-#include "Sample.h"              // Pour utiliser sample.tag()
+#include "knn.h"
+#include "Data.h"
+#include "Sample.h"
 #include "ClassificationReport.h"
-#include <algorithm>             // Pour std::sort (le tri)
-#include <map>                   // Pour le vote (compter les occurrences)
-#include <iostream>
+#include <algorithm>
+#include <map>
+#include <cmath>
 
-// Constructeur
-Knn::Knn(int k) : _k(k), _trainData(nullptr) {
-    if (_k < 1) {
-        std::cout << "Attention : k doit etre > 0. K remis a 1." << std::endl;
-        _k = 1;
-    }
-}
+Knn::Knn(int k) : _k(k), _trainData(nullptr) {}
 
-// Lazy Train : On stocke juste l'adresse des données (classifieur paresseux)
 void Knn::lazy_train(Data* data) {
     _trainData = data;
 }
 
-// Processus de test
-ClassificationReport* Knn::predict(Data* testData) {
-    ClassificationReport* report = new ClassificationReport();
+std::vector<std::pair<double, int>> Knn::getKnn(const Sample& sample) {
+    std::vector<std::pair<double, int>> distances;
 
-    // On boucle sur tous les exemples du fichier de test
-    // (Supposons que Data a une méthode nbSamples et un opérateur [])
-    for (size_t i = 0; i < testData->nbSamples(); ++i) {
-        const Sample& currentTestSample = (*testData)[i];
-
-        // 1. On prédit l'étiquette
-        int predictedTag = predictSingle(currentTestSample);
-
-        // 2. On ajoute le résultat au rapport (Prédiction vs Réalité)
-        report->add(predictedTag, currentTestSample.tag());
+    for (int i = 0; i < _trainData->nbSamples(); ++i) {
+        const Sample& trainSample = _trainData->getSample(i);
+        double dist = similarity(sample, trainSample);
+        distances.push_back({dist, trainSample.tag()});
     }
 
-    return report;
+    // Tri par distance (ordre croissant)
+    std::sort(distances.begin(), distances.end());
+
+    if (distances.size() > (size_t)_k) {
+        distances.resize(_k);
+    }
+    return distances;
 }
 
 int Knn::predictSingle(const Sample& sample) {
-    // Récupérer les k voisins les plus proches -> liste de paires {Score, Étiquette}
     std::vector<std::pair<double, int>> neighbors = getKnn(sample);
-
-    // Faire voter les voisins
     std::map<int, int> votes;
-    for (const auto& neighbor : neighbors) {
-        int label = neighbor.second; // On récupère l'étiquette du voisin
-        votes[label]++;              // On ajoute 1 vote
+
+    for (const auto& n : neighbors) {
+        votes[n.second]++;
     }
 
-    // Trouver celui qui a le plus de votes
     int bestLabel = -1;
     int maxVotes = -1;
-
     for (auto const& [label, count] : votes) {
         if (count > maxVotes) {
             maxVotes = count;
             bestLabel = label;
         }
     }
-
     return bestLabel;
 }
 
-void Knn::getKnn() {
-    return 
+ClassificationReport* Knn::predict(Data* testData) {
+    ClassificationReport* report = new ClassificationReport();
+    for (int i = 0; i < testData->nbSamples(); ++i) {
+        const Sample& current = testData->getSample(i);
+        int predictedTag = predictSingle(current);
+        report->add(predictedTag, current.tag());
+    }
+    return report;
+}
+
+double Knn::similarity(const Sample& a, const Sample& b) {
+    double sum = 0.0;
+    const std::vector<double>& featA = a.getFeatures();
+    const std::vector<double>& featB = b.getFeatures();
+
+    for (size_t i = 0; i < featA.size(); ++i) {
+        double diff = a[i] - b[i]; // Utilise l'opérateur [] de Sample
+        sum += diff * diff;
+    }
+    return std::sqrt(sum);
 }
