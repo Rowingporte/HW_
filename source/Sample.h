@@ -12,7 +12,7 @@ public:
     Sample(int tag, const std::vector<double>& features);
 
     // Méthodes pour obtenir des informations sur l'échantillon
-    int gettag() const;
+    int tag() const;
     const std::vector<double>& getFeatures() const;
 
     // Afficher les informations de l'échantillon

@@ -5,7 +5,7 @@ Sample::Sample(int tag, const std::vector<double>& features)
     : _tag(tag), features(features) {}
 
 // Méthode pour obtenir l'étiquette
-int Sample::gettag() const {
+int Sample::tag() const {
     return _tag;
 }
 
@@ -36,7 +36,7 @@ Sample Sample::scale(double factor) const {
 }
 
 std::string Sample::toString() const {
-    std::string result = "Label: " + std::to_string(_tag) + " | Features: ";
+    std::string result = "tag: " + std::to_string(_tag) + " | Features: ";
     for (const auto& feature : features) {
         result += std::to_string(feature) + " ";
     }
