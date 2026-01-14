@@ -35,7 +35,7 @@ class Knn {
         // Récupère les k plus proches voisins (scores et étiquettes)
         // étiquette : chiffre de 0 à 9
         // score : résultat du calcul mathématique de la fonction similarity entre vecteur testé et celui la base de données
-        //void getKnn(); J'AI PAS COMPRIS
+        void getKnn();
 
         // Prédit l'étiquette (0 à 9) pour un seul exemple
         int predictSingle(const Sample& sample);
