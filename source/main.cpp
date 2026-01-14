@@ -5,31 +5,34 @@
 #include <iostream>
 
 int main() {
+    // --- 1. Load Datasets ---
     Data trainData;
-    trainData.load("../data/Digits/digits.svm");
+    trainData.load("../data/test/train.svm");
 
-    // 1. Premier test : KNN Euclidien
-    Knn classifier(5);
-    classifier.lazy_train(&trainData);
+    Data testData;
+    testData.load("../data/test/test.svm");
 
-    std::cout << "--- Test KNN Euclidien ---" << std::endl;
-    // Déclaration initiale de 'report'
-    ClassificationReport* report = classifier.predict(&trainData);
-    report->show();
-    delete report; // On libère la mémoire, mais le NOM 'report' reste connu du compilateur
+    // --- 2. Setup KNN Euclidean ---
+    // k=3 is often more robust than k=1
+    Knn euclidianClassifier(3); 
+    
+    // We "train" on the training data
+    euclidianClassifier.lazy_train(&trainData);
 
-    // 2. Deuxième test : KNN Cosine
-    KnnCosine cosineClassifier(5); 
+    std::cout << "--- Testing KNN Euclidean ---" << std::endl;
+    // CRITICAL: We predict on the testData
+    ClassificationReport* reportEuclidian = euclidianClassifier.predict(&testData);
+    reportEuclidian->show();
+    delete reportEuclidian;
+
+    // --- 3. Setup KNN Cosine ---
+    KnnCosine cosineClassifier(3); 
     cosineClassifier.lazy_train(&trainData);
 
-    std::cout << "\n--- Test KNN Cosine ---" << std::endl;
-    
-    // CORRECTION : On ne remet pas "ClassificationReport*"
-    // On réassigne simplement une nouvelle valeur à la variable existante
-    report = cosineClassifier.predict(&trainData); 
-
-    report->show();
-    delete report;
+    std::cout << "\n--- Testing KNN Cosine ---" << std::endl;
+    ClassificationReport* reportCosine = cosineClassifier.predict(&testData); 
+    reportCosine->show();
+    delete reportCosine;
 
     return 0;
 }
