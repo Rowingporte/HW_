@@ -27,7 +27,7 @@ int KnnCosine::predictSingle(const Sample &sample) {
     std::vector<std::pair<double, int>> neighbors; // paire de (similarité, étiquette)
 
     for (int i = 0; i < _data.nbSamples(); ++i) {
-        const Sample& trainSample = _data[i];
+        const Sample& trainSample = _data.getSample(i);
         double sim = similarity(sample, trainSample);
         neighbors.push_back(std::make_pair(sim, _data.tag()));
     }
